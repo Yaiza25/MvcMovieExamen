@@ -55,8 +55,21 @@ namespace MvcMovie.Controllers
             return "From [HttpPost]Index: filter on " + searchString;
         }
         // GET: Movies/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int? id, Boolean txtId)
         {
+            ViewData["bTextoId"] = txtId;
+            var count = 0;
+
+            foreach (var item in _context.Movie)
+            {
+                if (count == 0)
+                {
+                    ViewData["PrimeraId"] = item.Id;
+                    count++;
+                }
+                ViewData["UltimaId"] = item.Id;
+            }
+
             if (id == null)
             {
                 return NotFound();

@@ -7,7 +7,7 @@
 <h1>Details</h1>
 
 <div>
-    <h4>Movie</h4>
+    <h4>Movie#@Model.Id</h4>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
@@ -44,5 +44,30 @@
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Back to List</a> |
+
+    @if ((int)ViewData["PrimeraId"] != @Model.Id)
+    {
+        <a asp-action="Details" asp-route-id="@(Model.Id - 1)" asp-route-txtId="@ViewData["bTextoId"]">Prev</a><a> |</a>
+    } 
+    else
+    {
+        <a>Prev |</a>
+    }
+    
+
+    @if ((Boolean)ViewData["bTextoId"])
+    {
+        <a>#@Model.Id |</a>
+    }
+
+    @if ((int)ViewData["UltimaId"] != @Model.Id)
+    {
+        <a asp-action="Details" asp-route-id="@(Model.Id + 1)" asp-route-txtId="@ViewData["bTextoId"]">Next</a>
+    } 
+    else
+    {
+        <a>Next</a>
+    }
+    
 </div>
