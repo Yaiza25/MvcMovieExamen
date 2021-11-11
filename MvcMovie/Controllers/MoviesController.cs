@@ -64,15 +64,14 @@ namespace MvcMovie.Controllers
             {
                 if (count == 0)
                 {
+                    if (id == null)
+                    {
+                        id = item.Id;
+                    }
                     ViewData["PrimeraId"] = item.Id;
                     count++;
                 }
                 ViewData["UltimaId"] = item.Id;
-            }
-
-            if (id == null)
-            {
-                return NotFound();
             }
 
             var movie = await _context.Movie
